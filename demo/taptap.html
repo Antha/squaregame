@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Tap Tap | Demonstration</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<link rel="stylesheet" type="text/css" href="../bootstrap/css/bootstrap.css"/>
+	<link rel="stylesheet" type="text/css" href="../style/taptap.css"/>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	</head>
+<body>
+
+	<!-- Add jQuery library -->
+	<script type="text/javascript" src="../lib/jquery.min.js"></script>
+	<script type="text/javascript">
+	var termoHeight = 250;
+	var fDescTermo;
+	var currentScore = 0;
+	var player_name;
+	$(document).ready(function(){
+		highestScore();
+		initializeComponent();
+		$("button.hint").click(function(){
+			termoHeight =  termoHeight + 15;
+			$(".termo").css("height", termoHeight+"px");
+			currentScore = currentScore + 10;
+			$(".score").html(currentScore);
+		});
+		setInterval(highestScore,1000);
+	});
+
+	function initializeComponent()
+	{
+		$("button.hint").prop('disabled',true);
+		$(".termo").css("height", termoHeight+"px");
+		$(".anime img").attr("src","../source/anime-stop.JPG");
+	}
+
+	function highestScore(){
+		var xmlhttp = new XMLHttpRequest();
+        xmlhttp.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+                $(".highscore value").html(this.responseText);
+            }
+        };
+        xmlhttp.open("GET", "taptap_hs.php");
+        xmlhttp.send();
+	}
+
+	function startGame(){
+		if($("input[name=player_name]").val() == "")
+		{
+			alert("Isi Nama Dulu Dong");
+			return false;
+		}
+		alert("Tekan Terus Tombol Merah Agar Indikator Tidak Turun. Jika sudah siap kelik OK");
+		player_name = $("input[name=player_name]").val();
+		termoHeight = 250;
+		$("button.hint").prop('disabled',false);
+		$("button[name=start]").hide();
+		$(".anime img").attr("src","../source/anime-cheer.gif");
+		fDescTermo = setInterval(descTermo,18);
+		$("html,body").animate({scrollTop:$(document).height()},1400);
+	}
+
+	function stopGame()
+	{
+     	alert("Game Berakhir Waktu Habis, Skor "+ player_name +" "+ currentScore);
+		clearInterval(fDescTermo);
+		$(".score").html(currentScore);
+		$("button[name=start]").show();
+		$("button.hint").prop('disabled',true);
+		$(".anime img").attr("src","../source/anime-stop.JPG");
+		$(".termo").css("background","green");
+		termoHeight = 250;
+		$(".termo").css("height", termoHeight+"px");
+		inputData();
+		currentScore = 0;
+	}
+
+	function inputData(){
+		$.ajax({
+			dataType:"json",
+			type:"POST",
+			url:"taptap_ihs.php",
+			data:{name:player_name,score:currentScore},
+			success:function(res){
+			}
+		});
+	}
+
+	function descTermo(){
+		if(termoHeight < 0 || termoHeight > 250){
+			stopGame();
+			return false;
+		}
+		if(termoHeight >= 150 || termoHeight <= 50)
+		{
+			$(".termo").css("background","red");
+		}
+		else {
+			$(".termo").css("background","green");
+		}
+		termoHeight =  termoHeight - 2;
+		$(".termo").css("height", termoHeight+"px");
+		$(".termo").html(termoHeight);
+	}
+
+	function highScore()
+	{
+		window.location.href = "taptap_highscore.php";
+	}
+
+	function cekname(cekpnm)
+	{
+		if(cekpnm.length > 10)
+		{
+			alert("Panjang Nama Maksimal 10 Karakter");
+			$("input[name='player_name']").val("");
+		}
+	}
+	</script>
+
+	<div class="container-main">
+	<div id="inline1 col-lg-12">
+		<h3 class="title">Tap Tap Game</h3>
+		<div class="container-start">
+			 Masukan Namamu <input type="text" name="player_name" onkeyup="cekname(this.value)"/> <br/>
+			 <button onclick="startGame()" name="start">MULAI</button> <br/>
+			 <button onclick="highScore()" style="background: #ff864b;">HIGH SCORE</button>
+			 <div class="highscore"> Score Tertinggi : <value>10000(Hainun)</value></div>
+		</div>
+
+		<div class="container-score col-lg-12 col-md-12 col-xs-12">
+			<div class="col-lg-12 col-xs-12">
+			    <h4>Score:</h4>
+		        <div class="score">
+		        </div>
+				<div style="color:red; margin:10px 0">
+				    Jangan Sampai Angka Pada Indikator Mencapai 250 atau 0.Karena Permainan Akan Berakhir.
+			    </div>
+		    </div>
+	    </div>
+
+		<div class="container-termo col-lg-6 col-md-6 col-xs-6">
+			<div class="col-lg-12 col-xs-12">
+				High
+			</div>
+		    <div class="termo col-lg-6 col-xs-12">
+		    </div>
+			<div class="col-lg-12 col-xs-12">
+				Low
+			</div>
+			<div class="caution col-lg-6 col-xs-12">
+				Tekan trus tombol agar indikator tidak turun ke bawah.
+				Jika Indikator Habis Maka Permainan Berakhir
+			</div>
+	    </div>
+
+		<div class="container-hint col-lg-6 col-md-6 col-xs-6">
+	  	    <div class="hint col-lg-12 col-xs-12">
+
+			    <button class="hint">Tap<br>Tap</button>
+    </div>
+			<div class="anime col-lg-12 col-xs-12">
+				<img src="../source/anime-cheer.gif" class="img-responsive"/>
+			</div>
+	    </div>
+	</div>
+    </div>
+
+</body>
+</html>

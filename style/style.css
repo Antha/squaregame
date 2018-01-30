@@ -1,0 +1,88 @@
+.fancybox-custom .fancybox-skin {
+    box-shadow: 0 0 50px #222;
+}
+
+body {
+    max-width: 700px;
+    margin: 0 auto;
+    font-family: arial;
+}
+
+h3.title{
+    background: cadetblue;
+    color: white;
+    text-align: center;
+    padding: 5px;
+    margin-bottom: 20px;
+}
+
+.container-main{
+    padding: 25px;
+}
+
+h3
+{
+    font-size: 32px;
+    font-family: arial;
+}
+
+
+.square
+{
+    position: relative;
+    display: block;
+    border: 3px #101010 solid;
+    font-size: 34px;
+    font-family: arial;
+    font-weight: 700;
+    text-align: center;
+    padding:50px;
+    color: white;
+}
+
+.choose button
+{
+    width: 100px;
+    margin: 10px 0;
+    padding: 7px;
+    background: #ffe8e8;
+    border: #f7b8b8 1px solid;
+    margin-right: 10px;
+}
+
+.score,.time
+{
+    font-size: 32px;
+    font-weight: 700;
+}
+
+.square .title{
+    background: white;
+}
+
+.container-start, .container-score{
+    text-align: center;
+}
+
+.container-start button{
+    margin: 10px;
+    background: #3ab9ea;
+    border: none;
+    padding: 10px 10px;
+    font-weight: 800;
+    color: white;
+    letter-spacing: 4px;
+    display:
+}
+
+.container-score h4{
+    font-size: 25px;
+}
+
+.inline1.high_score{
+    text-align: center;
+}
+
+.inline1 table{
+    text-align: left;
+}

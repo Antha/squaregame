@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Find The Heir's Love | Demonstration</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" type="text/css" href="../bootstrap/css/bootstrap.css"/>
+	<link rel="stylesheet" type="text/css" href="../style/heirs.css"/>
+</head>
+<body>
+
+	<!-- Add jQuery library -->
+	<script type="text/javascript" src="../lib/jquery.min.js"></script>
+	<script type="text/javascript">
+	var meter = 0,percentProg = 0;
+	var mTop2 = 180;
+	var corX = 0,corY = 0;
+	var moveButton,moveTime;
+	var startStat = 0;
+	var time = 0;
+	var curentScore = 0;
+
+	$(document).ready(function(){
+		animateBox();
+		//win();
+		$("button[name=start]").click(function(){
+			if($("input[name=player_name]").val() == '')
+			{
+				callMboxOk("Masukan Nama Anda Bos");
+				return false;
+			}
+			$("html,body").animate({scrollTop:$(document).height()},500);
+			callMboxYno("Kliklah Hati Warna Merah,<br/> Klik Warna Hitam Akan Game Over","start()");
+		});
+		$(".tap-button .thebutton").click(function(){
+			//alert("SIPP");
+			if(startStat == 0){
+				return false;
+			}
+			meter = meter + 5;
+			mTop2 = mTop2 - 5;
+			percentProg = (meter/160) * 100;
+			$(".couple-one img").css("margin-top",meter+"px");
+			$(".couple-two img").css("margin-top",mTop2+"px");
+			$(".indicator .text").html(percentProg+" %");
+			$(".progressbar .led").css("width",percentProg+"%");
+			if(percentProg == 100){
+				win();
+			}
+		});
+		$(".tap-button .black").click(function(){
+			callMboxOk("Anda Kalah Alias Game Over");
+			curentScore = 123456789;
+			stop();
+		});
+		$("input[name=player_pic]").bind("change",function(e){
+			var file = $(this).val();
+			var path = URL.createObjectURL(e.target.files[0]);
+			$("img.player_pic").show();
+			$("img.player_pic").attr("src",path);
+		});
+		$("button[name=highScore]").click(function(){
+			window.location.href = "hiscore.php";
+		});
+	});
+
+	function start(){
+		 revertValue();
+		 startStat = 1;
+		 moveTime = setInterval(runTime,1000);
+		 moveButton = setInterval(setPosition,700);
+		 $(".mbox_yno").css("display","none");
+		 $(".progressbar").show();
+		 $(".progressbar .led").css("width",0+"%");
+		 $(".indicator .text").html(0+" %");
+	}
+
+	function runTime(){
+		time = time + 1;
+		curentScore = time;
+		$(".indicator .time").html(time+" Second");
+	}
+
+	function win(){
+		var stmtWin = "Hore, Anda Berhasil Mempertemukan Cinta Mereka <img src='../source/th_couple.png' style='width:100%'/> ";
+		stmtWin = stmtWin + "<br/> Waktu Anda Menyelesaikannya Adalah "+curentScore;
+		callMboxOk(stmtWin);
+		stop();
+	}
+
+	function handleInput(textplay){
+		if(textplay.length >= 15){
+			callMboxOk("Maaf, Tidak Boleh Dari 15 Huruf");
+			$("input[name=player_name]").val("");
+			return false;
+		}
+	}
+
+	function stop(){
+		revertValue();
+		insertData();
+	}
+
+	function revertValue(){
+		meter = 0;
+		percentProg = 0;
+		startStat = 0;
+		time = 0;
+		clearInterval(moveTime);
+		clearInterval(moveButton);
+	}
+
+	function setPosition(){
+		corX = Math.floor(Math.random() * (1 + 80 - 0)) + 0;
+		corY = Math.floor(Math.random() * (1 + 250 - 0)) + 0;
+		$(".tap-button .thebutton").css({"margin-top":corY+"px","marginLeft":corX+"%"});
+		for(var x = 1 ; x <= 5; x++){
+			corX = Math.floor(Math.random() * (1 + 80 - 0)) + 0;
+			corY = Math.floor(Math.random() * (1 + 250 - 0)) + 0;
+			$(".tap-button .black:nth-child("+x+")").css({"margin-top":corY+"px","marginLeft":corX+"%"});
+		}
+	}
+
+	function animateBox(){
+		$(".mbox_ok").hide();
+        $(".mbox_yno").hide();
+		$(".container-start").animate({marginLeft:"0px",opacity:"show"},1500);
+		$("h3.title").animate({marginTop:"0px",opacity:"show"},1500);
+		$(".container-score h4").fadeIn(1500);
+	}
+
+	function callMboxOk(statement){
+        $(".mbox_ok span").html(statement);
+        $(".mbox_ok").css("display","block");
+        $(".mbox_ok button").click(function(){
+            $(".mbox_ok").css("display","none");
+        })
+    }
+
+    function callMboxYno(statement,thefuncY){
+        $(".mbox_yno span").html(statement);
+        $(".mbox_yno").css("display","block");
+        $(".mbox_yno button#yes").attr('onclick',thefuncY);
+		$(".mbox_yno button#no").click(function(){
+			$(".mbox_yno").css("display","none");
+		});
+    }
+
+	function insertData(){
+		var pfile = $("input[name=player_pic]")[0].files[0];
+		var name = $("input[name=player_name]").val();
+		var score = curentScore;
+		var formFile = new FormData();
+
+		formFile.append("name",name);
+		formFile.append("score",score);
+		formFile.append("file",pfile);
+
+		jQuery.ajax({
+			type:"POST",
+			url:"insert.php",
+			dataType:"json",
+			data:formFile,
+			processData:false,
+			contentType:false,
+			success:function(data){
+				alert(data);
+			}
+		});
+	}
+	</script>
+
+    <div class="mbox_yno">
+        <span>
+        lorem ipsum dolor sit amet lorem ipsum dolor sit amet lorem ipsum dolor sit
+        amet lorem ipsum dolor sit amet
+        </span>
+        <br/>
+        <button id="yes">Yes</button>
+        <button id="no">No</button>
+    </div>
+    <div class="mbox_ok">
+        <span>
+        lorem ipsum dolor sit amet lorem ipsum dolor sit amet lorem ipsum dolor sit
+        amet lorem ipsum dolor sit amet
+		<img src = "" width="100"/>
+        </span>
+        <br/>
+        <button click="">OK</button>
+    </div>
+	<div class="container-main">
+	<div id="inline1 col-lg-12">
+		<h3 class="title">FIND THE HEIR'S LOVE</h3>
+		<div class="container-start">
+			 <table>
+				 <tr>
+					 <td>Masukan Namamu </td>
+					 <td>
+						 <input type="text" name="player_name" onkeyup="handleInput(this.value)" placeholder="Maksimal 15 Karakter"/>
+					 </td>
+				 </tr>
+				 <tr>
+					 <td>Masukan Fotomu </td>
+					 <td>
+						 <input type="file" name="player_pic" />
+						 <span style="background: #EF8181;
+						    color: white;
+						    padding: 10px;
+						    font-weight: 700;">
+							BOLEH KOSONG
+						</span>
+					 </td>
+				 </tr>
+		     </table>
+			 <img class="player_pic" src="" width="100px"/><br/>
+			 <button name="start">MULAI</button> <br/>
+			 <button name="highScore" style="background: #ff864b;">HIGH SCORE</button>
+		</div>
+		<div class="container-score col-lg-12 col-md-12 col-xs-12">
+			<div class="col-lg-12 col-xs-12">
+			    <h4<span class="highest_score"></span></h4>
+		    </div>
+	    </div>
+		<div class="indicator col-lg-12 col-xs-12">
+			<div class="time col-lg-12 col-xs-12">
+			</div>
+			<div class="text col-lg-12 col-xs-12">
+			</div>
+			<div class="progressbar col-lg-12 col-xs-12">
+				<div class="led"></div>
+			</div>
+		</div>
+        <div class="container-game col-lg-12 col-xs-12">
+			<div class="tap-button col-lg-6 col-xs-6">
+				<div class="thebutton">
+				</div>
+				<div class="black">
+				</div>
+				<div class="black">
+				</div>
+				<div class="black">
+				</div>
+				<div class="black">
+				</div>
+				<div class="black">
+				</div>
+			</div>
+			<div class="couple col-lg-6 col-xs-6">
+				<div class="couple-one col-lg-12 col-xs-12">
+					<img src="../source/lee.png" class="img-responsive"/>
+				</div>
+				<div class="couple-two col-lg-12 col-xs-12">
+					<img src="../source/psh.png" class="img-responsive"/>
+				</div>
+			</div>
+        </div>
+	</div>
+    </div>
+</body>
+</html>

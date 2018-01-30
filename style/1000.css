@@ -1,0 +1,215 @@
+.fancybox-custom .fancybox-skin {
+    box-shadow: 0 0 50px #222;
+}
+
+body {
+    max-width: 700px;
+    margin: 0 auto;
+    font-family: arial;
+}
+
+h3.title{
+    background: #47c71e;
+    color: white;
+    text-align: center;
+    padding: 5px;
+    margin-bottom: 20px;
+}
+
+.container-main{
+    padding: 25px;
+}
+
+h3
+{
+    font-size: 32px;
+    font-family: arial;
+}
+
+
+.square
+{
+    position: relative;
+    display: block;
+    border: 3px #101010 solid;
+    font-size: 34px;
+    font-family: arial;
+    font-weight: 700;
+    text-align: center;
+    padding:50px;
+    color: white;
+}
+
+.choose button
+{
+    width: 100px;
+    margin: 10px 0;
+    padding: 7px;
+    background: #ffe8e8;
+    border: #f7b8b8 1px solid;
+    margin-right: 10px;
+}
+
+.score,.time
+{
+    font-size: 32px;
+    font-weight: 700;
+}
+
+.square .title{
+    background: white;
+}
+
+.container-start, .container-score{
+    text-align: center;
+}
+
+.container-start{
+    margin-left: -400px;
+}
+
+.container-wheel {
+    margin-top: 400px;
+}
+
+h3.title{
+    margin-top: -200px;
+}
+
+.container-start button{
+    margin: 10px;
+    background: #3ab9ea;
+    border: none;
+    padding: 10px 10px;
+    font-weight: 800;
+    color: white;
+    letter-spacing: 4px;
+}
+
+.container-score h4{
+    font-size: 25px;
+}
+
+.inline1.high_score{
+    text-align: center;
+}
+
+.inline1 table{
+    text-align: left;
+}
+
+.container-wheel {
+
+}
+
+.container-wheel .wheel{
+    background: orange;
+    border-radius: 140px;
+    padding: 30px 0;
+    /* height: 160px; */
+    width: 160px;
+    margin: 0 auto 0 auto;
+    margin-top: -165px;
+}
+
+.container-wheel .wheelX{
+    border-radius: 140px;
+    padding: 30px 0;
+    /* height: 160px; */
+    width: 170px;
+    margin: 0 auto 0 auto;
+    height: 170px;
+    border:green 6px dashed;
+}
+
+
+.container-wheel .wheel .number{
+    font-size: 70px;
+    text-align: center;
+}
+
+.container-wheel .maskot
+{
+    text-align: center;
+}
+
+.container-wheel .button button
+{
+    background: #0ac2fb;
+    margin: 0 auto;
+    padding: 20px;
+    color: #9a6c00;
+    border-radius: 10px;
+    font-weight: 800;
+    letter-spacing: 2px;
+}
+
+.container-wheel .button{
+    text-align: center;
+    margin: 10px 0;
+}
+
+.mbox_ok, .mbox_yno{
+    padding: 30px;
+    position: fixed;
+    background: rgba(255, 255, 255, 0.88);
+    border: 2px solid #bebef3;
+    width: 250px;
+    top: 50%;
+    left: 50%;
+    z-index: 99;
+    margin-top: -100px;
+    margin-left: -125px;
+    font-weight: 700;
+}
+
+.mbox_img{
+    padding: 30px;
+    position: fixed;
+    background: rgba(255, 255, 255, 0.88);
+    border: 2px solid #bebef3;
+    max-width: 100%;
+    width: 700px;
+    top: 50%;
+    z-index: 99;
+    margin-top: 0px;
+    font-weight: 700;
+    display: none;
+}
+
+table{
+    margin: 0 auto 0 auto;
+    margin-bottom: 20px;
+}
+
+table tr td{
+    padding-right : 10px;
+    text-align: left;
+}
+
+input{
+    margin-bottom: 10px;
+}
+
+.container-start,
+.container-wheel,
+.container-score h4
+{
+    display:none;
+}
+
+table.hiscore img{
+    width: 100%;
+}
+
+table.hiscore tr td{
+    width: 20%;
+}
+
+.img-hiscore{
+    max-height: 150px;
+    overflow: hidden;
+}
+
+.img-hiscore img{
+}

@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>1000 | Demonstration</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" type="text/css" href="../bootstrap/css/bootstrap.css"/>
+	<link rel="stylesheet" type="text/css" href="../style/1000.css"/>
+</head>
+<body>
+
+	<!-- Add jQuery library -->
+	<script type="text/javascript" src="../lib/jquery.min.js"></script>
+	<script type="text/javascript" src="play.js" runat="client"></script>
+
+    <div class="mbox_yno">
+        <span>
+        lorem ipsum dolor sit amet lorem ipsum dolor sit amet lorem ipsum dolor sit
+        amet lorem ipsum dolor sit amet
+        </span>
+        <br/>
+        <button id="yes">Yes</button>
+        <button id="no">No</button>
+    </div>
+    <div class="mbox_ok">
+        <span>
+        lorem ipsum dolor sit amet lorem ipsum dolor sit amet lorem ipsum dolor sit
+        amet lorem ipsum dolor sit amet
+		<img src = "" width="100"/>
+        </span>
+        <br/>
+        <button click="">OK</button>
+    </div>
+	<div class="container-main">
+	<div id="inline1 col-lg-12">
+		<h3 class="title">TAP 1000</h3>
+		<div class="container-start">
+			 <table>
+				 <tr>
+					 <td>Masukan Namamu </td>
+					 <td>
+						 <input type="text" name="player_name" onkeyup="handleInput(this.value)" placeholder="Maksimal 15 Karakter"/>
+					 </td>
+				 </tr>
+				 <tr>
+					 <td>Masukan Fotomu </td>
+					 <td>
+						 <input type="file" name="player_pic" accept="image/*"/>
+						 <span style="background: #EF8181;
+						    color: white;
+						    padding: 10px;
+						    font-weight: 700;">
+							BOLEH KOSONG
+						</span>
+					 </td>
+				 </tr>
+		     </table>
+			 <img class="player_pic" src="" width="100px"/><br/>
+			 <button onclick name="start">MULAI</button> <br/>
+			 <button onclick="highScore()" style="background: #ff864b;">HIGH SCORE</button>
+		</div>
+		<div class="container-score col-lg-12 col-md-12 col-xs-12">
+			<div class="col-lg-12 col-xs-12">
+			    <h4<span class="highest_score"></span></h4>
+		    </div>
+	    </div>
+        <div class="container-wheel col-lg-12 col-xs-12">
+			<div class="maskot col-lg-6 col-md-6 col-sm-6 col-xs-12">
+				<img src="../source/silent miku.JPG" class="img-responsive" />
+			</div>
+			<div class="thewheel col-lg-6 col-md-6 col-sm-6 col-xs-12">
+			    <div col-lg-12 col-xs-12 class="wheelX">
+                    <div class="number">
+                    </div>
+                </div>
+                <div col-lg-12 col-xs-12 class="wheel">
+                    <div class="number">
+                        1000
+                    </div>
+                </div>
+                <div class="button col-lg-12 col-xs-12">
+                    <button class="stop">
+                    STOP
+                    </button>
+                </div>
+		    </div>
+        </div>
+	</div>
+    </div>
+</body>
+</html>

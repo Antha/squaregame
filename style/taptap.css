@@ -1,0 +1,116 @@
+.fancybox-custom .fancybox-skin {
+    box-shadow: 0 0 50px #222;
+}
+
+body {
+    max-width: 700px;
+    margin: 0 auto;
+    font-family: arial;
+}
+
+h3.title{
+    background: #cc5318;
+    color: white;
+    text-align: center;
+    padding: 5px;
+    margin-bottom: 20px;
+}
+
+.container-main{
+    padding: 25px;
+}
+
+h3
+{
+    font-size: 32px;
+    font-family: arial;
+}
+
+.container-start .highscore{
+    font-size: 23px;
+    font-weight: 700;
+    color:pink;
+}
+
+.score,.time
+{
+    font-size: 32px;
+    font-weight: 700;
+}
+
+.square .title{
+    background: white;
+}
+
+.container-start, .container-score{
+    text-align: center;
+}
+
+.container-start button{
+    margin: 10px;
+    background: #3ab9ea;
+    border: none;
+    font-weight: 800;
+    color: white;
+    letter-spacing: 4px;
+    display:
+}
+
+.container-score h4{
+    font-size: 25px;
+}
+
+.inline1.high_score{
+    text-align: center;
+}
+
+.inline1 table{
+    text-align: left;
+}
+
+.container-termo h4{
+    font-size: 15px;
+    font-weight: 700;
+    line-height: 1.5;
+}
+
+.container-termo .termo
+{
+    width: 25px;
+    background-color: green;
+    position: relative;
+    color: white !important;
+}
+
+.container-termo .caution{
+    background: #9d5ea5;
+    padding: 4px;
+    color: white;
+}
+
+.container-hint
+{
+    text-align:center;
+}
+.container-hint .hint{
+    background: #ef7a25;
+    padding: 5px;
+    border-radius: 130px;
+    color: white;
+    font-weight: 700;
+    text-align: center;
+    /* height: 100px; */
+}
+
+.col-lg-6,.col-xs-12
+{
+    padding-left: 0px;
+    padding-right: 0px;
+}
+
+@media(max-width : 480px)
+{
+.anime img{
+    height: 200px;
+}
+}
